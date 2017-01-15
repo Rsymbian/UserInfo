@@ -3,28 +3,34 @@ package com.app.rabia.myapplication.view.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.domain.UserDataModel;
 
 
-public class MainScreenFragment extends Fragment implements ItemClickedHandler {
-
-
+public class MainScreenFragment extends Fragment implements ItemClickedHandler, MainView {
     private RecyclerView recyclerView;
     private UserDataModel mData;
     private MainScreenAdapter mAdapter;
     private ItemClickedHandler mUserActionListener;
+    private static StartupPresenter presenter;
+    private View mRootView;
 
+    public MainScreenFragment() {
+        //data loads on every start up
+        presenter = new StartupPresenter();
+        presenter.onTakeView(this);
+    }
 
-    public MainScreenFragment(UserDataModel dataModel, ItemClickedHandler actionHandler) {
-        mData = dataModel;
+    public void setData(ItemClickedHandler actionHandler) {
         mUserActionListener = actionHandler;
     }
 
@@ -37,34 +43,43 @@ public class MainScreenFragment extends Fragment implements ItemClickedHandler {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        recyclerView = (RecyclerView) view.findViewById(R.id.title_list);
-        mAdapter = new MainScreenAdapter(mData.getUserData(), this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                UserInfoFragment detailFragment = new  UserInfoFragment(new UserAllInfo("rabia", "text body", "rr", 2));
-//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.title_screen, detailFragment);
-//                //ft.addToBackStack("second screen");
-//                ft.commit();
-//            }
-//
-//                @Override
-//                public void onItemLongClick (View view,int position){
-//
-//                }
-//            }
-
-        //          ));
-        recyclerView.setAdapter(mAdapter);
+        mRootView = view;
+        if (mData != null) {
+            populateData();
+        }
     }
-
 
     @Override
     public void onItemClicked(int id) {
         mUserActionListener.onItemClicked(id);
+    }
+
+    @Override
+    public void setData(UserDataModel data) {
+
+    }
+
+    @Override
+    public void startCallCompleted(UserDataModel userDataModel) {
+        mUserActionListener.setData(userDataModel);
+        mData = userDataModel;
+        populateData();
+
+    }
+
+    private void populateData() {
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.title_list);
+        mAdapter = new MainScreenAdapter(mData.getUserData(), this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mRootView.getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(ContextCompat.getDrawable(mRootView.getContext(),R.drawable.divider));
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void errorOnStartUp() {
+        Toast.makeText(getActivity(), R.string.error_laoding, Toast.LENGTH_SHORT).show();
     }
 }

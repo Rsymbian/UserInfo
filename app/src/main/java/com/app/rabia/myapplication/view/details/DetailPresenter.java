@@ -21,10 +21,10 @@ public class DetailPresenter {
     }
 
     public void showDetails(int id) {
-        DetailFragment detailFragment = new DetailFragment(mDataModel.getUserAllInfo(id));
+        DetailFragment detailFragment = new DetailFragment();
+        detailFragment.setData(mDataModel.getUserAllInfo(id));
         FragmentTransaction ft = mActivity.getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.title_screen, detailFragment);
-        //ft.addToBackStack("second screen");
+        ft.replace(R.id.title_screen, detailFragment).addToBackStack("main sceen");
         ft.commit();
     }
 }

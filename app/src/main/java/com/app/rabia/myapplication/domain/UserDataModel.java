@@ -56,7 +56,7 @@ public class UserDataModel {
         userDataInfo.setName(getNameById(id));
         userDataInfo.setBody(getBodyById(id));
         userDataInfo.setTotalCommentsCount(getTotalCommentsById(id));
-        return null;
+        return userDataInfo;
 
     }
 

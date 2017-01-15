@@ -16,12 +16,12 @@ import java.util.Map;
 
 public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.MyViewHolder> {
 
-    private Map<Integer, String> mData;
-    private List<String> mList = new ArrayList<>();
+    private Map<Integer, String> mTitleData;
+    private List<MainScreenItem> mList = new ArrayList<>();
     private ItemClickedHandler listener;
 
-    public MainScreenAdapter(Map<Integer, String> titleList, ItemClickedHandler listener) {
-        mData = titleList;
+    public MainScreenAdapter(Map<Integer, String> title, ItemClickedHandler listener) {
+        mTitleData = title;
         this.listener = listener;
         prepareList();
     }
@@ -34,9 +34,14 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.title.setText(mList.get(position));
-        holder.title.setId(getIdFromMap(mList.get(position)));
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        holder.title.setText(mList.get(position).getTitle());
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClicked(mList.get(position).getId());
+            }
+        });
     }
 
     @Override
@@ -52,33 +57,16 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClicked(title.getId());
-                }
-            });
         }
-    }
-
-    private int getIdFromMap(String value) {
-        Iterator it = mData.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            if (pair.getValue().toString().equals(value)) {
-                return (int) pair.getKey();
-
-            }
-        }
-        return -1;
     }
 
     private void prepareList() {
-        Iterator it = mData.entrySet().iterator();
+        Iterator it = mTitleData.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            mList.add(pair.getValue().toString());
-            it.remove(); // avoids a ConcurrentModificationException
+            MainScreenItem item = new MainScreenItem((Integer) pair.getKey(), pair.getValue().toString());
+            mList.add(item);
+          //  it.remove();
         }
     }
 
