@@ -1,10 +1,7 @@
-package com.app.rabia.myapplication.view.main;
+package com.app.rabia.myapplication.view.titles;
 
 import com.app.rabia.myapplication.domain.UserDataModel;
 
-/**
- * Created by mansoor on 18/12/2016.
- */
 
 public interface ItemClickedHandler {
 

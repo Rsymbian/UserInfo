@@ -1,4 +1,4 @@
-package com.app.rabia.myapplication.view.main;
+package com.app.rabia.myapplication.view.titles;
 
 import com.app.rabia.myapplication.datasource.DataReady;
 import com.app.rabia.myapplication.datasource.server.ServerClient;

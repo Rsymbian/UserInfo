@@ -1,4 +1,4 @@
-package com.app.rabia.myapplication.view.main;
+package com.app.rabia.myapplication.main;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.domain.UserDataModel;
 import com.app.rabia.myapplication.view.details.DetailFragment;
+import com.app.rabia.myapplication.view.titles.ItemClickedHandler;
+import com.app.rabia.myapplication.view.titles.MainScreenFragment;
 
 public class MainActivity extends AppCompatActivity implements ItemClickedHandler {
 

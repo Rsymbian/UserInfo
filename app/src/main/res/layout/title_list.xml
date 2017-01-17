@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.MainActivity"
+    tools:context=".main.MainActivity"
     tools:showIn="@layout/activity_main">
+
+
 
     <TextView
         android:id="@+id/title_heading"
@@ -17,7 +19,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/title_list"
+        android:id="@+id/titlelist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"

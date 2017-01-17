@@ -2,7 +2,7 @@ package com.app.rabia.myapplication.view.details;
 
 import android.support.v4.app.FragmentTransaction;
 
-import com.app.rabia.myapplication.view.main.MainActivity;
+import com.app.rabia.myapplication.main.MainActivity;
 import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.domain.UserDataModel;
 

@@ -9,9 +9,7 @@ import java.util.List;
 import retrofit.http.GET;
 import rx.Observable;
 
-/**
- * Created by mansoor on 10/12/2016.
- */
+
 
 public interface ServerAPI {
 

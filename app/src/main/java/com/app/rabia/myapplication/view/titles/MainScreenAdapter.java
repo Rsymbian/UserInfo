@@ -1,29 +1,39 @@
-package com.app.rabia.myapplication.view.main;
+package com.app.rabia.myapplication.view.titles;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.rabia.myapplication.R;
+import com.app.rabia.myapplication.datasource.UserInfo;
+import com.app.rabia.myapplication.domain.UserDataModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static com.app.rabia.myapplication.R.id.imageView;
+
 
 public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.MyViewHolder> {
 
-    private Map<Integer, String> mTitleData;
+    private static final String IMAGE_BASE_URL = "https://api.adorable.io/avatars/285/";
+    private UserDataModel mData;
     private List<MainScreenItem> mList = new ArrayList<>();
-    private ItemClickedHandler listener;
+    private NotifyListItemClicked listener;
+    private Context mContext;
 
-    public MainScreenAdapter(Map<Integer, String> title, ItemClickedHandler listener) {
-        mTitleData = title;
+    public MainScreenAdapter(UserDataModel data, NotifyListItemClicked listener, Context context) {
+        mData = data;
         this.listener = listener;
         prepareList();
+        mContext = context;
     }
 
     @Override
@@ -34,12 +44,17 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        Picasso.with(mContext)
+                .load(IMAGE_BASE_URL + mList.get(position).getEmail() + ".png")
+                .placeholder(R.drawable.image_placeholder)
+                .into(holder.image);
         holder.title.setText(mList.get(position).getTitle());
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClicked(mList.get(position).getId());
+                listener.notifyListItemClicked(mList.get(position).getId());
+
             }
         });
     }
@@ -53,20 +68,22 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title;
+        private ImageView image;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
+            image = (ImageView) itemView.findViewById(imageView);
         }
     }
 
     private void prepareList() {
-        Iterator it = mTitleData.entrySet().iterator();
+        Iterator it = mData.getAllUserInfo().entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            MainScreenItem item = new MainScreenItem((Integer) pair.getKey(), pair.getValue().toString());
+            MainScreenItem item = new MainScreenItem((Integer) pair.getKey(), ((UserInfo) pair.getValue()).getTitle(), ((UserInfo) pair.getValue()).getEmailAddress());
             mList.add(item);
-          //  it.remove();
+            //  it.remove();
         }
     }
 

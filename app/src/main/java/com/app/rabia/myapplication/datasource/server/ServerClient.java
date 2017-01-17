@@ -4,10 +4,6 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
 
-/**
- * Created by mansoor on 10/12/2016.
- */
-
 public class ServerClient {
 
     public static final String BASE_URL = "http://jsonplaceholder.typicode.com/";

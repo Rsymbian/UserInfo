@@ -1,38 +1,28 @@
 package com.app.rabia.myapplication.domain;
 
+import com.app.rabia.myapplication.datasource.UserInfo;
 import com.app.rabia.myapplication.datasource.data.CommentData;
 import com.app.rabia.myapplication.datasource.data.PostData;
-import com.app.rabia.myapplication.datasource.DataInfo;
 import com.app.rabia.myapplication.datasource.data.UserData;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class UserDataModel {
 
     private List<UserData> userData;
     private List<PostData> postData;
     private List<CommentData> commentData;
-    private Map<Integer, DataInfo> mData = new HashMap<Integer, DataInfo>();
-    private Map<Integer, String> mTitleList = new HashMap<Integer, String>();
+    private Map<Integer, UserInfo> mData = new HashMap<Integer, UserInfo>();
 
     public UserDataModel(List<UserData> userDatas, List<PostData> postDatas, List<CommentData> commentDatas) {
         this.userData = userDatas;
         this.postData = postDatas;
         this.commentData = commentDatas;
-        createUserData();
         prepareAllInfoUser();
     }
 
-    private void createUserData() {
-        for (int i = 0; i < postData.size(); i++) {
-            Integer key = postData.get(i).getId();
-            String value = postData.get(i).getTitle();
-            mTitleList.put(key, value);
-        }
-    }
 
     private void prepareAllInfoUser() {
         for (int i = 0; i < postData.size(); i++) {
@@ -40,23 +30,20 @@ public class UserDataModel {
         }
     }
 
-    private Map<Integer, DataInfo> getAllUserInfo() {
+    public Map<Integer, UserInfo> getAllUserInfo() {
         return mData;
     }
 
-    public Map<Integer, String> getUserData() {
-        return mTitleList;
-    }
+    public UserInfo getUserAllInfo(int id) {
 
-    public DataInfo getUserAllInfo(int id) {
-
-        DataInfo userDataInfo = new DataInfo();
-        userDataInfo.setId(id);
-        userDataInfo.setTitle(mTitleList.get(id));
-        userDataInfo.setName(getNameById(id));
-        userDataInfo.setBody(getBodyById(id));
-        userDataInfo.setTotalCommentsCount(getTotalCommentsById(id));
-        return userDataInfo;
+        UserInfo userUserInfo = new UserInfo();
+        userUserInfo.setId(id);
+        userUserInfo.setTitle(getTitleById(id));
+        userUserInfo.setName(getNameById(getUserIdbyPostId(id)));
+        userUserInfo.setBody(getBodyById(id));
+        userUserInfo.setTotalCommentsCount(getTotalCommentsById(id));
+        userUserInfo.setEmailAddress(getEmailbyId(getUserIdbyPostId(id)));
+        return userUserInfo;
 
     }
 
@@ -73,7 +60,7 @@ public class UserDataModel {
 
     private String getBodyById(int id) {
 
-        int postId = getPostIdbyId(id);
+        int postId = getUserIdbyPostId(id);
         for (int i = 0; i < postData.size(); i++) {
             if (postData.get(i).getId() == postId) {
                 return postData.get(i).getBody();
@@ -82,7 +69,7 @@ public class UserDataModel {
         return null;
     }
 
-    private int getPostIdbyId(int id) {
+    private int getUserIdbyPostId(int id) {
         for (int i = 0; i < postData.size(); i++) {
             if (postData.get(i).getId() == id) {
                 return postData.get(i).getUserId();
@@ -99,6 +86,26 @@ public class UserDataModel {
             }
         }
         return null;
+    }
+
+    private String getTitleById(int id) {
+        for (int i = 0; i < postData.size(); i++) {
+            if (postData.get(i).getId() == id) {
+                return postData.get(i).getTitle();
+            }
+        }
+        return null;
+    }
+
+    private String getEmailbyId(int id) {
+        String email = null;
+        for (int i = 0; i < userData.size(); i++) {
+            if (userData.get(i).getId() == id) {
+                email = userData.get(i).getEmail();
+            }
+        }
+
+        return email;
     }
 
 }

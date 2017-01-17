@@ -1,18 +1,16 @@
-package com.app.rabia.myapplication.view.main;
-
-/**
- * Created by mansoor on 14/01/2017.
- */
+package com.app.rabia.myapplication.view.titles;
 
 public class MainScreenItem {
 
     private int id;
     private String title;
+    private String email;
 
 
-    public MainScreenItem( int id, String title) {
+    public MainScreenItem( int id, String title, String email ) {
         this.id = id;
         this.title = title;
+        this.email = email;
     }
 
     public String getTitle() {
@@ -22,4 +20,10 @@ public class MainScreenItem {
     public int getId() {
         return id;
     }
+
+
+    public String getEmail() {
+        return email;
+    }
+
 }

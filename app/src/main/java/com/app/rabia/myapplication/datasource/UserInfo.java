@@ -1,18 +1,15 @@
 package com.app.rabia.myapplication.datasource;
 
-/**
- * Created by mansoor on 12/12/2016.
- */
-
-public class DataInfo {
+public class UserInfo {
 
     private Integer id;
     private String title;
     private String name;
     private String body;
     private int totalComments;
+    private String emailAddress;
 
-    public DataInfo() {
+    public UserInfo() {
 
     }
 
@@ -55,4 +52,13 @@ public class DataInfo {
     public void setTotalCommentsCount(int total) {
         this.totalComments = total;
     }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
 }

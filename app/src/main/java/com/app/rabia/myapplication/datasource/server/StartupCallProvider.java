@@ -13,10 +13,6 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func3;
 
-/**
- * Created by mansoor on 10/12/2016.
- */
-
 public class StartupCallProvider {
 
     private DataReady mDataReady;

@@ -1,4 +1,4 @@
-package com.app.rabia.myapplication.view.main;
+package com.app.rabia.myapplication.view.titles;
 
 
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.domain.UserDataModel;
 
 
-public class MainScreenFragment extends Fragment implements ItemClickedHandler, MainView {
+public class MainScreenFragment extends Fragment implements NotifyListItemClicked, MainView {
     private RecyclerView recyclerView;
     private UserDataModel mData;
     private MainScreenAdapter mAdapter;
@@ -50,16 +50,6 @@ public class MainScreenFragment extends Fragment implements ItemClickedHandler, 
     }
 
     @Override
-    public void onItemClicked(int id) {
-        mUserActionListener.onItemClicked(id);
-    }
-
-    @Override
-    public void setData(UserDataModel data) {
-
-    }
-
-    @Override
     public void startCallCompleted(UserDataModel userDataModel) {
         mUserActionListener.setData(userDataModel);
         mData = userDataModel;
@@ -68,12 +58,12 @@ public class MainScreenFragment extends Fragment implements ItemClickedHandler, 
     }
 
     private void populateData() {
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.title_list);
-        mAdapter = new MainScreenAdapter(mData.getUserData(), this);
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.titlelist);
+        mAdapter = new MainScreenAdapter(mData ,this,getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mRootView.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(ContextCompat.getDrawable(mRootView.getContext(),R.drawable.divider));
+        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(ContextCompat.getDrawable(mRootView.getContext(), R.drawable.divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(mAdapter);
     }
@@ -81,5 +71,10 @@ public class MainScreenFragment extends Fragment implements ItemClickedHandler, 
     @Override
     public void errorOnStartUp() {
         Toast.makeText(getActivity(), R.string.error_laoding, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void notifyListItemClicked(int id) {
+        mUserActionListener.onItemClicked(id);
     }
 }

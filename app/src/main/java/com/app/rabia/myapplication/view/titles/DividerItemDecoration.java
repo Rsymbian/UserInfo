@@ -1,4 +1,4 @@
-package com.app.rabia.myapplication.view.main;
+package com.app.rabia.myapplication.view.titles;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -6,9 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by mansoor on 15/01/2017.
- */
+
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
