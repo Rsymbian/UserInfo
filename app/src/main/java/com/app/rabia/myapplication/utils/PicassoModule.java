@@ -10,13 +10,13 @@ import com.squareup.picasso.Picasso;
 
 public class PicassoModule {
 
-    private static Picasso instance;
+    private static Picasso sInstance;
 
     public static Picasso getInstance(Context context) {
-        if (instance == null) {
-            instance = new Picasso.Builder(context).build();
+        if (sInstance == null) {
+            sInstance = new Picasso.Builder(context).build();
         }
-        return instance;
+        return sInstance;
     }
 
 }

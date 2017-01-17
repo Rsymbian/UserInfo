@@ -11,22 +11,22 @@ import java.util.Map;
 
 public class UserDataModel {
 
-    private List<UserData> userData;
-    private List<PostData> postData;
-    private List<CommentData> commentData;
+    private List<UserData> mUserData;
+    private List<PostData> mPostData;
+    private List<CommentData> mCommentData;
     private Map<Integer, UserInfo> mData = new HashMap<Integer, UserInfo>();
 
     public UserDataModel(List<UserData> userDatas, List<PostData> postDatas, List<CommentData> commentDatas) {
-        this.userData = userDatas;
-        this.postData = postDatas;
-        this.commentData = commentDatas;
+        this.mUserData = userDatas;
+        this.mPostData = postDatas;
+        this.mCommentData = commentDatas;
         prepareAllInfoUser();
     }
 
 
     private void prepareAllInfoUser() {
-        for (int i = 0; i < postData.size(); i++) {
-            mData.put(postData.get(i).getId(), getUserAllInfo(postData.get(i).getId()));
+        for (int i = 0; i < mPostData.size(); i++) {
+            mData.put(mPostData.get(i).getId(), getUserAllInfo(mPostData.get(i).getId()));
         }
     }
 
@@ -49,8 +49,8 @@ public class UserDataModel {
 
     private int getTotalCommentsById(int id) {
         int commentsCount = 0;
-        for (int i = 0; i < commentData.size(); i++) {
-            if (commentData.get(i).getPostId() == id) {
+        for (int i = 0; i < mCommentData.size(); i++) {
+            if (mCommentData.get(i).getPostId() == id) {
                 commentsCount++;
             }
         }
@@ -61,18 +61,18 @@ public class UserDataModel {
     private String getBodyById(int id) {
 
         int postId = getUserIdbyPostId(id);
-        for (int i = 0; i < postData.size(); i++) {
-            if (postData.get(i).getId() == postId) {
-                return postData.get(i).getBody();
+        for (int i = 0; i < mPostData.size(); i++) {
+            if (mPostData.get(i).getId() == postId) {
+                return mPostData.get(i).getBody();
             }
         }
         return null;
     }
 
     private int getUserIdbyPostId(int id) {
-        for (int i = 0; i < postData.size(); i++) {
-            if (postData.get(i).getId() == id) {
-                return postData.get(i).getUserId();
+        for (int i = 0; i < mPostData.size(); i++) {
+            if (mPostData.get(i).getId() == id) {
+                return mPostData.get(i).getUserId();
             }
         }
         return -1;
@@ -80,18 +80,18 @@ public class UserDataModel {
 
 
     private String getNameById(int id) {
-        for (int i = 0; i < userData.size(); i++) {
-            if (userData.get(i).getId() == id) {
-                return userData.get(i).getName();
+        for (int i = 0; i < mUserData.size(); i++) {
+            if (mUserData.get(i).getId() == id) {
+                return mUserData.get(i).getName();
             }
         }
         return null;
     }
 
     private String getTitleById(int id) {
-        for (int i = 0; i < postData.size(); i++) {
-            if (postData.get(i).getId() == id) {
-                return postData.get(i).getTitle();
+        for (int i = 0; i < mPostData.size(); i++) {
+            if (mPostData.get(i).getId() == id) {
+                return mPostData.get(i).getTitle();
             }
         }
         return null;
@@ -99,9 +99,9 @@ public class UserDataModel {
 
     private String getEmailbyId(int id) {
         String email = null;
-        for (int i = 0; i < userData.size(); i++) {
-            if (userData.get(i).getId() == id) {
-                email = userData.get(i).getEmail();
+        for (int i = 0; i < mUserData.size(); i++) {
+            if (mUserData.get(i).getId() == id) {
+                email = mUserData.get(i).getEmail();
             }
         }
 

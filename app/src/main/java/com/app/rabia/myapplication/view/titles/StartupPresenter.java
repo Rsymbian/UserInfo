@@ -8,24 +8,24 @@ import com.app.rabia.myapplication.domain.UserDataModel;
 
 public class StartupPresenter implements DataReady {
 
-    private MainView view;
+    private MainView mView;
 
     public StartupPresenter() {
         new StartupCallProvider().loadStartupData(this, ServerClient.getClient());
     }
 
     public void onTakeView(MainView view) {
-        this.view = view;
+        this.mView = view;
     }
 
 
     @Override
     public void onDataReady(UserDataModel dataModel) {
-        view.startCallCompleted(dataModel);
+        mView.startCallCompleted(dataModel);
     }
 
     @Override
     public void OnError() {
-        view.errorOnStartUp();
+        mView.errorOnStartUp();
     }
 }

@@ -4,14 +4,13 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
 
+import static com.app.rabia.myapplication.utils.Constants.BASE_URL;
+
 public class ServerClient {
 
-    public static final String BASE_URL = "http://jsonplaceholder.typicode.com/";
-    private static Retrofit retrofit = null;
-
-
     public static Retrofit getClient() {
-        if (retrofit==null) {
+        Retrofit retrofit = null;
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

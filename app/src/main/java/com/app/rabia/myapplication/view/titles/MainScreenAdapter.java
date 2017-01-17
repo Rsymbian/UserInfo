@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.datasource.UserInfo;
 import com.app.rabia.myapplication.domain.UserDataModel;
-import com.squareup.picasso.Picasso;
+import com.app.rabia.myapplication.main.MyApplication;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,11 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 import static com.app.rabia.myapplication.R.id.imageView;
+import static com.app.rabia.myapplication.utils.Constants.IMAGE_BASE_URL;
 
 
 public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.MyViewHolder> {
 
-    private static final String IMAGE_BASE_URL = "https://api.adorable.io/avatars/285/";
+
     private UserDataModel mData;
     private List<MainScreenItem> mList = new ArrayList<>();
     private NotifyListItemClicked listener;
@@ -45,7 +46,7 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        Picasso.with(mContext)
+        MyApplication.getInstance().getPicasso(mContext)
                 .load(IMAGE_BASE_URL + mList.get(position).getEmail() + ".png")
                 .placeholder(R.drawable.image_placeholder)
                 .into(holder.image);

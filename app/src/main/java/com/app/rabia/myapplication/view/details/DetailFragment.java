@@ -15,9 +15,7 @@ import android.widget.TextView;
 
 import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.datasource.UserInfo;
-import com.squareup.picasso.Picasso;
-
-import static com.app.rabia.myapplication.R.layout.userinfo;
+import com.app.rabia.myapplication.main.MyApplication;
 
 public class DetailFragment extends Fragment {
 
@@ -34,7 +32,7 @@ public class DetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        return inflater.inflate(userinfo, parent, false);
+        return inflater.inflate(R.layout.userinfo, parent, false);
     }
 
 
@@ -50,7 +48,7 @@ public class DetailFragment extends Fragment {
             body.setText(getFormattedString("Description :", mUserInfo.getBody()));
             username.setText(getFormattedString("Username :", mUserInfo.getName()));
             total_comments.setText(getFormattedString("Total Comments :", mUserInfo.getTotalCommentsCount() + ""));
-            Picasso.with(getContext()).load(IMAGE_BASE_URL + mUserInfo.getEmailAddress() + ".png").placeholder(R.drawable.image_placeholder).into(image);
+            MyApplication.getInstance().getPicasso(getContext()).load(IMAGE_BASE_URL + mUserInfo.getEmailAddress() + ".png").placeholder(R.drawable.image_placeholder).into(image);
         }
     }
 

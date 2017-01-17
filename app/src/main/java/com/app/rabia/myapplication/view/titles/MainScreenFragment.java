@@ -17,7 +17,7 @@ import com.app.rabia.myapplication.domain.UserDataModel;
 
 
 public class MainScreenFragment extends Fragment implements NotifyListItemClicked, MainView {
-    private RecyclerView recyclerView;
+    private RecyclerView mRecyclerView;
     private UserDataModel mData;
     private MainScreenAdapter mAdapter;
     private ItemClickedHandler mUserActionListener;
@@ -58,14 +58,14 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
     }
 
     private void populateData() {
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.titlelist);
+        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.titlelist);
         mAdapter = new MainScreenAdapter(mData ,this,getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mRootView.getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(ContextCompat.getDrawable(mRootView.getContext(), R.drawable.divider));
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        recyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

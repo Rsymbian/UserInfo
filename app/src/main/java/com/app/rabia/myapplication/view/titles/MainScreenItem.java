@@ -2,28 +2,28 @@ package com.app.rabia.myapplication.view.titles;
 
 public class MainScreenItem {
 
-    private int id;
-    private String title;
-    private String email;
+    private int mId;
+    private String mTitle;
+    private String mEmail;
 
 
     public MainScreenItem( int id, String title, String email ) {
-        this.id = id;
-        this.title = title;
-        this.email = email;
+        mId = id;
+        mTitle = title;
+        mEmail = email;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public int getId() {
-        return id;
+        return mId;
     }
 
 
     public String getEmail() {
-        return email;
+        return mEmail;
     }
 
 }
