@@ -3,8 +3,9 @@ package com.app.rabia.myapplication.main;
 import android.app.Application;
 import android.content.Context;
 
-import com.app.rabia.myapplication.utils.PicassoModule;
-import com.squareup.picasso.Picasso;
+import com.app.rabia.myapplication.di.ApplicationComponent;
+import com.app.rabia.myapplication.di.ApplicationModule;
+import com.app.rabia.myapplication.di.DaggerApplicationComponent;
 
 
 public class MyApplication extends Application {
@@ -27,7 +28,8 @@ public class MyApplication extends Application {
         sApplicationInstance = application;
     }
 
-    public Picasso getPicasso(Context context) {
-        return PicassoModule.getInstance(context);//PicassoModule.getInstance(getApplicationContext());
+    public ApplicationComponent getApplicationComponent(Context context) {
+       return DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(context)).build();
     }
+
 }

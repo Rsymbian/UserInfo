@@ -16,11 +16,17 @@ import android.widget.TextView;
 import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.datasource.UserInfo;
 import com.app.rabia.myapplication.main.MyApplication;
+import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
 
 public class DetailFragment extends Fragment {
 
     private UserInfo mUserInfo;
     private static final String IMAGE_BASE_URL = "https://api.adorable.io/avatars/285/";
+
+    @Inject
+    Picasso picasso;
 
     public DetailFragment() {
 
@@ -32,6 +38,7 @@ public class DetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        MyApplication.getInstance().getApplicationComponent(getActivity()).inject(this);
         return inflater.inflate(R.layout.userinfo, parent, false);
     }
 
@@ -48,7 +55,7 @@ public class DetailFragment extends Fragment {
             body.setText(getFormattedString("Description :", mUserInfo.getBody()));
             username.setText(getFormattedString("Username :", mUserInfo.getName()));
             total_comments.setText(getFormattedString("Total Comments :", mUserInfo.getTotalCommentsCount() + ""));
-            MyApplication.getInstance().getPicasso(getContext()).load(IMAGE_BASE_URL + mUserInfo.getEmailAddress() + ".png").placeholder(R.drawable.image_placeholder).into(image);
+            picasso.load(IMAGE_BASE_URL + mUserInfo.getEmailAddress() + ".png").placeholder(R.drawable.image_placeholder).into(image);
         }
     }
 

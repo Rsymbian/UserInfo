@@ -12,11 +12,14 @@ import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.datasource.UserInfo;
 import com.app.rabia.myapplication.domain.UserDataModel;
 import com.app.rabia.myapplication.main.MyApplication;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 import static com.app.rabia.myapplication.R.id.imageView;
 import static com.app.rabia.myapplication.utils.Constants.IMAGE_BASE_URL;
@@ -29,13 +32,17 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
     private List<MainScreenItem> mList = new ArrayList<>();
     private NotifyListItemClicked listener;
     private Context mContext;
+    @Inject
+    Picasso picasso;
 
     public MainScreenAdapter(UserDataModel data, NotifyListItemClicked listener, Context context) {
         mData = data;
         this.listener = listener;
         prepareList();
         mContext = context;
+        MyApplication.getInstance().getApplicationComponent(mContext).inject(this);
     }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,8 +53,7 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        MyApplication.getInstance().getPicasso(mContext)
-                .load(IMAGE_BASE_URL + mList.get(position).getEmail() + ".png")
+        picasso.load(IMAGE_BASE_URL + mList.get(position).getEmail() + ".png")
                 .placeholder(R.drawable.image_placeholder)
                 .into(holder.image);
         holder.title.setText(mList.get(position).getTitle());
