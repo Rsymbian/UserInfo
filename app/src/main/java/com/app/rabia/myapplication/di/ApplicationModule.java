@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.app.rabia.myapplication.datasource.server.ServerClient;
 import com.app.rabia.myapplication.datasource.server.StartupCallProvider;
+import com.app.rabia.myapplication.utils.PicassoModule;
 import com.app.rabia.myapplication.view.titles.StartupPresenter;
 import com.squareup.picasso.Picasso;
 
@@ -31,19 +32,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     public Picasso providePicasso() {
-        return new Picasso.Builder(context).build();
-    }
-
-    @Provides
-    @Singleton
-    public Retrofit provideRetrofit() {
-        return ServerClient.getClient();
-    }
-
-    @Provides
-    @Singleton
-    public StartupCallProvider provideStartupCallProvider(Retrofit retrofit) {
-        return new StartupCallProvider(retrofit);
+        return PicassoModule.getInstance(context);
     }
 
     @Provides
