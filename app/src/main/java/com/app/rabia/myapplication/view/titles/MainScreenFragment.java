@@ -13,9 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.app.rabia.myapplication.R;
-import com.app.rabia.myapplication.datasource.server.ServerClient;
-import com.app.rabia.myapplication.datasource.server.StartupCallProvider;
 import com.app.rabia.myapplication.domain.UserDataModel;
+import com.app.rabia.myapplication.main.MyApplication;
+
+import javax.inject.Inject;
 
 
 public class MainScreenFragment extends Fragment implements NotifyListItemClicked, MainView {
@@ -26,11 +27,15 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
     private static StartupPresenter presenter;
     private View mRootView;
 
+    @Inject
+    StartupPresenter startupPresenter;
+
     public MainScreenFragment() {
         //data loads on every start up
-        presenter = new StartupPresenter(new StartupCallProvider(ServerClient.getClient()));
-        presenter.startLoading();
-        presenter.onTakeView(this);
+        MyApplication.getInstance().getApplicationComponent(getActivity()).inject(this);
+       // presenter = new StartupPresenter(new StartupCallProvider(ServerClient.getClient()));
+        startupPresenter.startLoading();
+        startupPresenter.onTakeView(this);
     }
 
     public void setData(ItemClickedHandler actionHandler) {

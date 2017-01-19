@@ -29,7 +29,7 @@ public class MyApplication extends Application {
     }
 
     public ApplicationComponent getApplicationComponent(Context context) {
-       return DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(context)).build();
+        return DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(context)).build();
     }
 
 }

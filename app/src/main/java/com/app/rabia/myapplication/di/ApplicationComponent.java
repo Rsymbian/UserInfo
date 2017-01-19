@@ -2,6 +2,8 @@ package com.app.rabia.myapplication.di;
 
 import com.app.rabia.myapplication.view.details.DetailFragment;
 import com.app.rabia.myapplication.view.titles.MainScreenAdapter;
+import com.app.rabia.myapplication.view.titles.MainScreenFragment;
+import com.app.rabia.myapplication.view.titles.StartupPresenter;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
@@ -19,5 +21,10 @@ public interface ApplicationComponent {
 
     void inject(DetailFragment detailFragment);
     void inject(MainScreenAdapter mainScreenAdapter);
+
+    StartupPresenter getStartupPresenter();
+
+
+    void inject(MainScreenFragment mainScreenFragment);
 
 }
