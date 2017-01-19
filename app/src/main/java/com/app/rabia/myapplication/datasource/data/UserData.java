@@ -14,14 +14,18 @@ public class UserData {
     @SerializedName("name")
     private String name;
 
+
     @SerializedName("username")
     private String username;
+
 
     @SerializedName("email")
     private String email;
 
+
     @SerializedName("address")
     private AddressData address;
+
 
     @SerializedName("phone")
     private String phone;
@@ -29,9 +33,20 @@ public class UserData {
     @SerializedName("website")
     private String website;
 
+
     @SerializedName("company")
     private CompanyData company;
 
+    public UserData(int id, CompanyData company, String website, String phone, AddressData address, String email, String username, String name) {
+        this.id = id;
+        this.company = company;
+        this.website = website;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.username = username;
+        this.name = name;
+    }
 
     public int getId() {
         return id;

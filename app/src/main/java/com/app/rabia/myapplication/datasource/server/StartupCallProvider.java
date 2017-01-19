@@ -17,14 +17,19 @@ public class StartupCallProvider {
 
     private DataReady mDataReady;
     private UserDataModel mData;
+    private Retrofit mRetrofit;
+
+    public StartupCallProvider(Retrofit client) {
+        mRetrofit = client;
+    }
 
 
-    public void loadStartupData(DataReady dataReady, Retrofit client) {
+    public void loadStartupData(DataReady dataReady) {
 
         mDataReady = dataReady;
-        Observable<List<UserData>> userDataObservable = ClientProvider.getUserDataClient(client);
-        Observable<List<PostData>> postDataObservable = ClientProvider.getPostDataClient(client);
-        Observable<List<CommentData>> commentDataObservable = ClientProvider.getCommentDataClient(client);
+        Observable<List<UserData>> userDataObservable = ClientProvider.getUserDataClient(mRetrofit);
+        Observable<List<PostData>> postDataObservable = ClientProvider.getPostDataClient(mRetrofit);
+        Observable<List<CommentData>> commentDataObservable = ClientProvider.getCommentDataClient(mRetrofit);
 
         Observable<UserDataModel> combined = Observable.zip(userDataObservable, postDataObservable, commentDataObservable, new Func3<List<UserData>, List<PostData>, List<CommentData>, UserDataModel>() {
             @Override

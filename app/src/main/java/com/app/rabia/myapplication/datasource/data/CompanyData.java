@@ -14,6 +14,7 @@ public class CompanyData {
     @SerializedName("bs")
     private String bs;
 
+
     public String getName() {
         return name;
     }

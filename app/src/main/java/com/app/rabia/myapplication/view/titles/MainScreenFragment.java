@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.app.rabia.myapplication.R;
+import com.app.rabia.myapplication.datasource.server.ServerClient;
+import com.app.rabia.myapplication.datasource.server.StartupCallProvider;
 import com.app.rabia.myapplication.domain.UserDataModel;
 
 
@@ -26,7 +28,8 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
 
     public MainScreenFragment() {
         //data loads on every start up
-        presenter = new StartupPresenter();
+        presenter = new StartupPresenter(new StartupCallProvider(ServerClient.getClient()));
+        presenter.startLoading();
         presenter.onTakeView(this);
     }
 
@@ -59,7 +62,7 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
 
     private void populateData() {
         mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.titlelist);
-        mAdapter = new MainScreenAdapter(mData ,this,getContext());
+        mAdapter = new MainScreenAdapter(mData, this, getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mRootView.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
