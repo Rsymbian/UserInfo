@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">User Catalogue</string>
     <string name="error_laoding">"error loading data"</string>
+    <string name="laoding">"loading .."</string>
+    <string name="Titles">"Titles"</string>
+
 </resources>
