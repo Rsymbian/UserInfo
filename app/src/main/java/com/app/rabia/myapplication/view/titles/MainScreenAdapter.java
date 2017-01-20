@@ -32,6 +32,7 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
     private List<MainScreenItem> mList = new ArrayList<>();
     private NotifyListItemClicked listener;
     private Context mContext;
+
     @Inject
     Picasso picasso;
 
@@ -57,11 +58,10 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
                 .placeholder(R.drawable.image_placeholder)
                 .into(holder.image);
         holder.title.setText(mList.get(position).getTitle());
-        holder.title.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.notifyListItemClicked(mList.get(position).getId());
-
             }
         });
     }
@@ -90,7 +90,6 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
             Map.Entry pair = (Map.Entry) it.next();
             MainScreenItem item = new MainScreenItem((Integer) pair.getKey(), ((UserInfo) pair.getValue()).getTitle(), ((UserInfo) pair.getValue()).getEmailAddress());
             mList.add(item);
-            //  it.remove();
         }
     }
 

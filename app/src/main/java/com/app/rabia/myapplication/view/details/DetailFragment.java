@@ -51,10 +51,10 @@ public class DetailFragment extends Fragment {
         TextView total_comments = (TextView) getActivity().findViewById(R.id.total_comments_txt);
         ImageView image = (ImageView) getActivity().findViewById(R.id.detial_image);
         if (mUserInfo != null) {
-            title.setText(getFormattedString("Post Title :", mUserInfo.getTitle()));
-            body.setText(getFormattedString("Description :", mUserInfo.getBody()));
-            username.setText(getFormattedString("Username :", mUserInfo.getName()));
-            total_comments.setText(getFormattedString("Total Comments :", mUserInfo.getTotalCommentsCount() + ""));
+            username.setText(mUserInfo.getName());
+            title.setText(getFormattedString(getActivity().getResources().getString(R.string.post_title), mUserInfo.getTitle()));
+            body.setText(getFormattedString(getActivity().getResources().getString(R.string.description), mUserInfo.getBody()));
+            total_comments.setText(getFormattedString(getActivity().getResources().getString(R.string.description), mUserInfo.getTotalCommentsCount() + ""));
             picasso.load(IMAGE_BASE_URL + mUserInfo.getEmailAddress() + ".png").placeholder(R.drawable.image_placeholder).into(image);
         }
     }

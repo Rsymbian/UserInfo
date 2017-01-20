@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.rabia.myapplication.R;
@@ -29,11 +30,12 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
 
     @Inject
     StartupPresenter startupPresenter;
+    private TextView mEmptyText;
 
     public MainScreenFragment() {
         //data loads on every start up
         MyApplication.getInstance().getApplicationComponent(getActivity()).inject(this);
-       // presenter = new StartupPresenter(new StartupCallProvider(ServerClient.getClient()));
+        // presenter = new StartupPresenter(new StartupCallProvider(ServerClient.getClient()));
         startupPresenter.startLoading();
         startupPresenter.onTakeView(this);
     }
@@ -54,7 +56,15 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
         mRootView = view;
         if (mData != null) {
             populateData();
+        } else {
+            showEmptyView();
         }
+    }
+
+    private void showEmptyView() {
+        mEmptyText = (TextView) getActivity().findViewById(R.id.empty_view);
+        mEmptyText.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -67,6 +77,7 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
 
     private void populateData() {
         mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.titlelist);
+        mEmptyText.setVisibility(View.GONE);
         mAdapter = new MainScreenAdapter(mData, this, getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mRootView.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);

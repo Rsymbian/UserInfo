@@ -2,6 +2,10 @@
     <string name="app_name">User Catalogue</string>
     <string name="error_laoding">"error loading data"</string>
     <string name="laoding">"loading .."</string>
-    <string name="Titles">"Titles"</string>
+    <string name="titles">"Titles"</string>
+    <string name="post_title">"Post Title: "</string>
+    <string name="description">"Description: "</string>
+    <string name="total_comments">"Total Comments: "</string>
+
 
 </resources>

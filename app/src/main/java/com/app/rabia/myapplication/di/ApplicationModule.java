@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.Retrofit;
+import retrofit2.Retrofit;
 
 /**
  * Created by mansoor on 19/01/2017.
@@ -26,7 +26,7 @@ public class ApplicationModule {
 
     public ApplicationModule(Context context) {
         this.context = context;
-        mRetrofit = ServerClient.getClient();
+
     }
 
     @Provides
@@ -38,6 +38,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     public StartupPresenter provideStartupPresenter() {
+        mRetrofit = ServerClient.getClient();
         return new StartupPresenter(new StartupCallProvider(mRetrofit));
     }
 

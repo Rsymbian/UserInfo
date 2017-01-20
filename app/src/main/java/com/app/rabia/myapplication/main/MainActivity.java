@@ -17,17 +17,19 @@ public class MainActivity extends AppCompatActivity implements ItemClickedHandle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        MyApplication.getInstance().setCacheDirectory(this);
+        setContentView(R.layout.activity_main);
+        MainScreenFragment fragment = new MainScreenFragment();
+        fragment.setData(this);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.title_screen, fragment, fragment.getClass().getSimpleName()).commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MainScreenFragment fragment = new MainScreenFragment();
-        fragment.setData(this);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.title_screen, fragment, fragment.getClass().getSimpleName()).commit();
+
     }
 
 

@@ -6,7 +6,7 @@ import com.app.rabia.myapplication.datasource.data.UserData;
 
 import java.util.List;
 
-import retrofit.http.GET;
+import retrofit2.http.GET;
 import rx.Observable;
 
 

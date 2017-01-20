@@ -8,7 +8,7 @@ import com.app.rabia.myapplication.datasource.DataReady;
 
 import java.util.List;
 
-import retrofit.Retrofit;
+import retrofit2.Retrofit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func3;

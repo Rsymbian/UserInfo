@@ -11,6 +11,9 @@ import com.app.rabia.myapplication.di.DaggerApplicationComponent;
 public class MyApplication extends Application {
 
     private static MyApplication sApplicationInstance;
+    private static final long CACHE_SIZE = 1 * 1024 * 1024;
+    private okhttp3.Cache mCache;
+
 
     @Override
     public void onCreate() {
@@ -32,4 +35,11 @@ public class MyApplication extends Application {
         return DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(context)).build();
     }
 
+    public void setCacheDirectory(Context context) {
+        mCache = new okhttp3.Cache(context.getCacheDir(), CACHE_SIZE);
+    }
+
+    public okhttp3.Cache getCacheDirectory() {
+        return mCache;
+    }
 }

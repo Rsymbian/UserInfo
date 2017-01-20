@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,29 @@
     tools:showIn="@layout/activity_main">
 
 
-
     <TextView
         android:id="@+id/title_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titles"
+        android:text="@string/titles"
         android:textSize="16sp"
         android:textStyle="bold" />
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/titlelist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:layout_below="@+id/title_heading"/>
+        android:layout_below="@+id/title_heading"
+        android:scrollbars="vertical" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/laoding"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+</FrameLayout>
