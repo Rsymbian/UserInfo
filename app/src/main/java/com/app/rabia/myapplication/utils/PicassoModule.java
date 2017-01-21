@@ -4,9 +4,7 @@ import android.content.Context;
 
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by mansoor on 16/01/2017.
- */
+// Picasso Module to load images
 
 public class PicassoModule {
 

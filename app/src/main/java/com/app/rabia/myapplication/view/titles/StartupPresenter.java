@@ -4,7 +4,6 @@ import com.app.rabia.myapplication.datasource.DataReady;
 import com.app.rabia.myapplication.datasource.server.StartupCallProvider;
 import com.app.rabia.myapplication.domain.UserDataModel;
 
-
 public class StartupPresenter implements DataReady {
 
     private MainView mView;

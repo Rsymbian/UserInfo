@@ -12,6 +12,7 @@ import com.app.rabia.myapplication.R;
 import com.app.rabia.myapplication.datasource.UserInfo;
 import com.app.rabia.myapplication.domain.UserDataModel;
 import com.app.rabia.myapplication.main.MyApplication;
+import com.app.rabia.myapplication.utils.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class MainScreenAdapter extends RecyclerView.Adapter<MainScreenAdapter.My
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        picasso.load(IMAGE_BASE_URL + mList.get(position).getEmail() + ".png")
+        picasso.load(IMAGE_BASE_URL + mList.get(position).getEmail() + Constants.PNG)
                 .placeholder(R.drawable.image_placeholder)
                 .into(holder.image);
         holder.title.setText(mList.get(position).getTitle());

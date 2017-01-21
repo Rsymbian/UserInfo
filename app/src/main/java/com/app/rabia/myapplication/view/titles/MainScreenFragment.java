@@ -35,7 +35,6 @@ public class MainScreenFragment extends Fragment implements NotifyListItemClicke
     public MainScreenFragment() {
         //data loads on every start up
         MyApplication.getInstance().getApplicationComponent(getActivity()).inject(this);
-        // presenter = new StartupPresenter(new StartupCallProvider(ServerClient.getClient()));
         startupPresenter.startLoading();
         startupPresenter.onTakeView(this);
     }

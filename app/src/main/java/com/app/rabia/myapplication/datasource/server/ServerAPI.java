@@ -10,9 +10,9 @@ import retrofit2.http.GET;
 import rx.Observable;
 
 
-
 public interface ServerAPI {
 
+    //Retrofit client available server Api
 
     @GET("posts")
     Observable<List<PostData>> getPosts();

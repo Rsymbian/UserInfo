@@ -15,7 +15,7 @@ public class StartupPresenterTests {
 
     private StartupPresenter mClassUnderTest;
 
-
+    @Mock
     private MainView mView;
 
     @Mock
@@ -34,9 +34,9 @@ public class StartupPresenterTests {
 
     @Test
     public void testStartCompleteCallInvokedWhenDataIsReady() {
-//        mClassUnderTest = new StartupPresenter(mProvider);
-//        mClassUnderTest.onTakeView(mView);
-//        mClassUnderTest.onDataReady(mData);
-//        verify(mView, times(1)).startCallCompleted(mData);
+        mClassUnderTest = new StartupPresenter(mProvider);
+        mClassUnderTest.onTakeView(mView);
+        mClassUnderTest.onDataReady(mData);
+        //verify(mView, times(1)).startCallCompleted(mData);
     }
 }

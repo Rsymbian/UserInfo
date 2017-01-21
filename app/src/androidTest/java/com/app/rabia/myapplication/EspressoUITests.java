@@ -28,7 +28,15 @@ public class EspressoUITests {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void TestToVerifyAllElementsAreDisplayed() {
+    public void TestFirstPageLoaded()
+    {
+        ViewInteraction firstTitle = onView(withId(R.id.title_heading));
+        firstTitle.check(matches(withText(containsString("Title"))));
+    }
+
+
+    @Test
+    public void TestToVerifyWhenWeClickedOnTitleDtailsPageDisplayed() {
 
         ViewInteraction firstTitle = onView(
                 allOf(withId(R.id.title), withText("provident vel ut sit ratione est"), isDisplayed()));
@@ -37,21 +45,18 @@ public class EspressoUITests {
         ViewInteraction detailImage = onView(withId(R.id.detial_image));
         detailImage.check(matches(isDisplayed()));
 
-        ViewInteraction userName = onView(withId(R.id.username_txt));
-        userName.check(matches(isDisplayed()));
-        userName.check(matches(withText(containsString("Username :"))));
 
         ViewInteraction postTitle = onView(withId(R.id.title_txt));
         postTitle.check(matches(isDisplayed()));
-        postTitle.check(matches(withText(containsString("Post Title :"))));
+        postTitle.check(matches(withText(containsString("Post Title"))));
 
         ViewInteraction description = onView(withId(R.id.body_txt));
         description.check(matches(isDisplayed()));
-        description.check(matches(withText(containsString("Description :"))));
+        description.check(matches(withText(containsString("Description"))));
 
         ViewInteraction totalComments = onView(withId(R.id.total_comments_txt));
         totalComments.check(matches(isDisplayed()));
-        totalComments.check(matches(withText(containsString("Total Comments :"))));
+        totalComments.check(matches(withText(containsString("Total Comments"))));
 
         pressBack();
 

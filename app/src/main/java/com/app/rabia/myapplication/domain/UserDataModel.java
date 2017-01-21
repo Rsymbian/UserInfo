@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//Data Model to hold all data needed by App UI
+
 public class UserDataModel {
 
     private List<UserData> mUserData;

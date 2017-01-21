@@ -2,9 +2,6 @@ package com.app.rabia.myapplication.datasource.data;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by mansoor on 10/12/2016.
- */
 
 public class UserData {
 

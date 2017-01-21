@@ -2,6 +2,7 @@ package com.app.rabia.myapplication.datasource;
 
 public class UserInfo {
 
+
     private Integer id;
     private String title;
     private String name;

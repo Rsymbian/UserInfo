@@ -6,12 +6,12 @@ import android.content.Context;
 import com.app.rabia.myapplication.di.ApplicationComponent;
 import com.app.rabia.myapplication.di.ApplicationModule;
 import com.app.rabia.myapplication.di.DaggerApplicationComponent;
+import com.app.rabia.myapplication.utils.Constants;
 
 
 public class MyApplication extends Application {
 
     private static MyApplication sApplicationInstance;
-    private static final long CACHE_SIZE = 1 * 1024 * 1024;
     private okhttp3.Cache mCache;
 
 
@@ -27,16 +27,12 @@ public class MyApplication extends Application {
         return sApplicationInstance;
     }
 
-    protected static void setInstance(MyApplication application) {
-        sApplicationInstance = application;
-    }
-
     public ApplicationComponent getApplicationComponent(Context context) {
         return DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(context)).build();
     }
 
     public void setCacheDirectory(Context context) {
-        mCache = new okhttp3.Cache(context.getCacheDir(), CACHE_SIZE);
+        mCache = new okhttp3.Cache(context.getCacheDir(), Constants.CACHE_SIZE);
     }
 
     public okhttp3.Cache getCacheDirectory() {

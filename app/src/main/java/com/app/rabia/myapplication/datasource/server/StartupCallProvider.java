@@ -31,6 +31,7 @@ public class StartupCallProvider {
         Observable<List<PostData>> postDataObservable = ClientProvider.getPostDataClient(mRetrofit);
         Observable<List<CommentData>> commentDataObservable = ClientProvider.getCommentDataClient(mRetrofit);
 
+        //calling Rxjava to for all async calls
         Observable<UserDataModel> combined = Observable.zip(userDataObservable, postDataObservable, commentDataObservable, new Func3<List<UserData>, List<PostData>, List<CommentData>, UserDataModel>() {
             @Override
             public UserDataModel call(List<UserData> userDatas, List<PostData> postDatas, List<CommentData> commentDatas) {
